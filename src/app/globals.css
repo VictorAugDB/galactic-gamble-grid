@@ -2,32 +2,52 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --orange-300: 234 142 65;
+    --orange-400: 221 135 65;
+    --red-600: 225 23 23;
+    --green-400: 23 231 44;
+    --blue-400: 23 127 233;
+    --blue-500: 37 70 244;
+    --blue-600: 13 103 189;
+    --blue-700: 44 60 203;
+    --purple-300: 121 99 255;
+    --brown-400: 126 78 61;
+    --cyan-400: 53 202 208;
+    --gray-700: 116 116 149;
+    --gray-950: 20 20 32;
+    --background: 14 13 48;
+    --card: 25 27 61;
+    --text-darker: 112 114 147;
+    --text-medium: 167 170 205;
+  }
+ 
+  h1,
+  .h1 {
+    @apply text-2xl font-bold md:text-[2rem] md:leading-[3rem];
+  }
+ 
+  h2,
+  .h2 {
+    @apply text-xl font-bold md:text-2xl;
+  }
+ 
+  h3,
+  .h3 {
+    @apply text-lg font-bold md:text-xl;
+  }
+ 
+  h4,
+  .h4 {
+    @apply text-base font-bold md:text-lg;
+  }
+
+
+  html,
+  body,
+  #__next {
+    @apply min-h-full antialiased bg-background text-white text-base;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
