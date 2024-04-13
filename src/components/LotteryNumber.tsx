@@ -3,11 +3,11 @@ import { VariantProps, cva } from 'class-variance-authority'
 import { ComponentProps } from 'react'
 
 const lotteryNumberVariants = cva(
-  'rounded-full w-[30px] h-[30px] flex items-center justify-center font-bold',
+  'rounded-full w-[30px] h-[30px] flex items-center justify-center font-bold text-white text-base',
   {
     variants: {
       variant: {
-        default: 'bg-card',
+        default: 'bg-gray-800',
         orange: 'bg-orange-300',
         cyan: 'bg-cyan-400',
       },

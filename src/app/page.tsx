@@ -1,9 +1,9 @@
 import { Back } from '@/components/Back'
 import { Button } from '@/components/Button'
 import { CurrencyCard } from '@/components/CurrencyCard'
+import { Info } from '@/components/Info'
 import { Tabs } from '@/components/Tabs'
 import { Ticket } from '@/components/Ticket'
-import { TicketsValuesInfo } from '@/components/TicketValuesInfo'
 import { toBRL } from '@/lib/intl'
 
 export default function Home() {
@@ -92,7 +92,7 @@ export default function Home() {
   ]
 
   return (
-    <main className="h-full py-3 px-16 space-y-8">
+    <main className="h-full py-3 px-2 sm:px-16 space-y-8">
       <Back />
       <h1>Perfil</h1>
       <div className="flex gap-8 flex-wrap">
@@ -101,7 +101,7 @@ export default function Home() {
       </div>
       <div className="py-4 bg-card rounded-lg space-y-9">
         <Tabs numberOfTickets={userTickets.length} />
-        <div className="px-7 space-y-8">
+        <div className="px-1 sm:px-7 space-y-8">
           <div className="space-y-3">
             <div className="flex gap-11 pb-3 flex-wrap justify-center">
               {userTickets.map((ut, idx) => (
@@ -126,7 +126,7 @@ export default function Home() {
             </strong>
           </div>
           <Button className="mx-auto block">COMPRAR BILHETES</Button>
-          <TicketsValuesInfo ticketsValues={ticketsValues} />
+          <Info ticketsValues={ticketsValues} />
         </div>
       </div>
     </main>

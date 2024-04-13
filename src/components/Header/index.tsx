@@ -35,29 +35,11 @@ export function Header() {
           <div className="fixed left-0 top-0 z-10 h-screen w-screen bg-[rgba(0,0,0,0.2)]"></div>
         )}
       </div>
-      <div className="flex gap-8 divide-x-2">
-        <div id="user-info" className="flex gap-2.5 items-center">
-          <div
-            id="avatar"
-            className="flex items-center justify-center rounded-full border border-gray-700 bg-gray-900 text-gray-700 h-[3.125rem] w-[3.125rem]"
-          >
-            <strong>LC</strong>
-          </div>
-          <div className="gap-1.5">
-            <div className="truncate w-[5.75rem]">
-              <strong className="text-blue-400">{user.id}</strong>
-            </div>
-            <strong className="text-green-400 text-sm">R$ 50.000,00</strong>
-          </div>
-          <LogOut className="ml-[9px] text-yellow-400" />
-        </div>
-        <div className="pl-8">
-          <Button variant="darker-blue" size="sm" className="gap-1.5 font-bold">
-            COMPRE TICKETS
-            <img src="/images/cifon-coin.svg" alt="coin"></img>
-          </Button>
-        </div>
+      <div className="hidden md:flex gap-8 divide-x-2">
+        <UserInfo userId={user.id} />
+        <BuyTicketsButton />
       </div>
+
       <AnimatePresence>
         {isNavVisible ? (
           <motion.div
@@ -74,8 +56,12 @@ export function Header() {
               />
             </div>
 
-            <div className="flex items-center gap-2 justify-center">
+            <div className="flex flex-col items-center gap-2 justify-center">
               <Logo />
+              <div className="pt-2 flex flex-col items-center justify-center gap-8 md:hidden border border-slate-700 rounded p-4">
+                <UserInfo userId={user.id} />
+                <BuyTicketsButton />
+              </div>
             </div>
             <div>
               <Nav
@@ -87,5 +73,40 @@ export function Header() {
         ) : null}{' '}
       </AnimatePresence>
     </header>
+  )
+}
+
+type UserInfoProps = {
+  userId: string
+}
+
+function UserInfo({ userId }: UserInfoProps) {
+  return (
+    <div id="user-info" className="flex gap-2.5 items-center">
+      <div
+        id="avatar"
+        className="flex items-center justify-center rounded-full border border-gray-700 bg-gray-900 text-gray-700 h-[3.125rem] w-[3.125rem]"
+      >
+        <strong>LC</strong>
+      </div>
+      <div className="gap-1.5">
+        <div className="truncate w-[5.75rem]">
+          <strong className="text-blue-400">{userId}</strong>
+        </div>
+        <strong className="text-green-400 text-sm">R$ 50.000,00</strong>
+      </div>
+      <LogOut className="ml-[9px] text-yellow-400" />
+    </div>
+  )
+}
+
+function BuyTicketsButton() {
+  return (
+    <div className="pl-8">
+      <Button variant="darker-blue" size="sm" className="gap-1.5 font-bold">
+        COMPRE TICKETS
+        <img src="/images/cifon-coin.svg" alt="coin"></img>
+      </Button>
+    </div>
   )
 }
