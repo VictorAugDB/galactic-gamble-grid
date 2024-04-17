@@ -7,8 +7,8 @@ import { cn } from '@/lib/utils'
 const logoutText = 'Logout'
 
 const links = [
-  { href: '/', label: 'Profile' },
-  { href: '/results', label: 'Results' },
+  { href: '/', label: 'Bilhetes' },
+  { href: '/results', label: 'Resultados' },
 ]
 
 type NavProps = ComponentProps<'nav'> & {

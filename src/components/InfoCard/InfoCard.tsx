@@ -16,20 +16,24 @@ export function InfoCard({
     <div className="bg-card px-4 py-5 w-fit rounded-lg min-w-[13.9375rem] space-y-2">
       <div className="flex gap-3 items-center">
         <strong className="text-text-medium">
-          {numberOfActiveBets ? 'APOSTAS ATIVAS' : balance ? 'SALDO' : 'LUCRO'}
+          {numberOfActiveBets !== undefined
+            ? 'TICKETS ATIVOS'
+            : balance
+              ? 'SALDO'
+              : 'LUCRO'}
         </strong>
         <img
           src={`/images/${numberOfActiveBets ? 'tickets.svg' : balance ? 'money.svg' : 'profit.svg'}`}
           alt=""
         />
       </div>
-      {numberOfActiveBets ? (
+      {numberOfActiveBets !== undefined ? (
         <span className="text-orange-300 font-bold text-2xl">
           {numberOfActiveBets}{' '}
-          <span className="font-normal text-brown-400">ATIVAS</span>
+          <span className="font-normal text-brown-400">ATIVOS</span>
         </span>
       ) : null}
-      {balance ? <Balance balance={balance} /> : null}
+      {balance !== undefined ? <Balance balance={balance} /> : null}
       {profit ? (
         <strong
           data-is-positive={profit > 0}

@@ -11,9 +11,10 @@ import { toBRL } from '@/lib/intl'
 
 export type Bet = {
   id: string
-  price: number
-  date: Date
-  numbersSelected: number[]
+  totalTicketsCost: number
+  totalRewards: number
+  createdAt: Date
+  sortedNumbers: number[]
 }
 
 const columnHelper = createColumnHelper<Bet>()
@@ -25,13 +26,34 @@ const defaultColumns = [
       <strong className="text-text-medium">{props.getValue()}</strong>
     ),
   }),
-  columnHelper.accessor('price', {
-    header: 'PREÇO',
+  columnHelper.accessor('totalTicketsCost', {
+    header: 'GASTO',
+    cell: (props) => (
+      <span className="text-red-600">{toBRL(props.getValue())}</span>
+    ),
+  }),
+  columnHelper.accessor('totalRewards', {
+    header: 'RECOMPENSAS',
     cell: (props) => (
       <span className="text-green-400">{toBRL(props.getValue())}</span>
     ),
   }),
-  columnHelper.accessor('date', {
+  columnHelper.accessor((row) => row.totalRewards - row.totalTicketsCost, {
+    header: 'LUCRO',
+    cell: (props) => {
+      const profit = props.getValue()
+
+      return (
+        <div
+          data-is-positive={profit > 0}
+          className="text-red-600 data-[is-positive=true]:text-green-400 flex items-center"
+        >
+          <span>{profit < 0 ? '-' : null}</span> {toBRL(Math.abs(profit))}
+        </div>
+      )
+    },
+  }),
+  columnHelper.accessor('createdAt', {
     header: 'DATA',
     cell: (props) =>
       Intl.DateTimeFormat('pt-BR', {
@@ -39,36 +61,26 @@ const defaultColumns = [
         month: '2-digit',
         year: 'numeric',
       })
-        .format(props.getValue())
+        .format(new Date(props.getValue()))
         .replace('/', '.'),
   }),
 ]
 
 type ResultsTableProps = {
-  sortedNumbers: Set<number>
   data: Bet[]
 }
 
-export function ResultsTable({ sortedNumbers, data }: ResultsTableProps) {
+export function ResultsTable({ data }: ResultsTableProps) {
   const table = useReactTable({
     columns: [
       ...defaultColumns,
-      columnHelper.accessor('numbersSelected', {
-        header: 'SELECIONADOS',
+      columnHelper.accessor('sortedNumbers', {
+        header: 'NÚMEROS SORTEADOS',
         cell: (props) => (
-          <div className="flex items-center gap-14">
-            <span className="text-sm text-text-darker">
-              {props.getValue().length}
-            </span>
-            <div className="flex gap-2 flex-wrap">
-              {props.getValue().map((number: number) => (
-                <LotteryNumber
-                  key={number}
-                  number={number}
-                  variant={sortedNumbers.has(number) ? 'cyan' : 'default'}
-                />
-              ))}
-            </div>
+          <div className="flex gap-2 flex-wrap">
+            {props.getValue().map((number: number) => (
+              <LotteryNumber key={number} number={number} variant={'cyan'} />
+            ))}
           </div>
         ),
       }),
@@ -78,7 +90,7 @@ export function ResultsTable({ sortedNumbers, data }: ResultsTableProps) {
   })
 
   return (
-    <div className="w-screen max-w-7xl overflow-auto">
+    <div className="w-screen max-w-7xl overflow-auto flex">
       <table className="w-full">
         <thead className="text-text-darker text-xs border-b-2 border-slate-800">
           {table.getHeaderGroups().map((headerGroup) => (

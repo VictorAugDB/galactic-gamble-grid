@@ -10,7 +10,7 @@ export async function getUserBalance() {
     token: process.env.JWT_TOKEN ?? '',
     options: {
       next: {
-        tags: ['active-tickets'],
+        tags: ['active-tickets', 'bets', 'balance'],
       },
     },
   })

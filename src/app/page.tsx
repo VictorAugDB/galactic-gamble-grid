@@ -34,9 +34,7 @@ export default async function Home() {
         userBalance={userBalance}
       >
         <div className="flex gap-8 flex-wrap">
-          {userTicketsWithValues.length ? (
-            <InfoCard numberOfActiveBets={userTicketsWithValues.length} />
-          ) : null}
+          <InfoCard numberOfActiveBets={userTicketsWithValues.length} />
 
           <InfoCard balance={userBalance} />
         </div>

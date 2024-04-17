@@ -6,6 +6,7 @@ import { Nav } from './_components/Nav'
 import { LogOut, Menu, X } from 'lucide-react'
 import { Logo } from './_components/Logo'
 import { Button } from '../Button'
+import { addMoney } from '@/app/actions'
 
 export function Header() {
   const [isNavVisible, setIsNavVisible] = useState(false)
@@ -101,10 +102,19 @@ function UserInfo({ userId }: UserInfoProps) {
 }
 
 function BuyTicketsButton() {
+  async function handleAddMoney() {
+    await addMoney(50000)
+  }
+
   return (
     <div className="pl-8">
-      <Button variant="darker-blue" size="sm" className="gap-1.5 font-bold">
-        COMPRE TICKETS
+      <Button
+        onClick={handleAddMoney}
+        variant="darker-blue"
+        size="sm"
+        className="gap-1.5 font-bold"
+      >
+        ADICIONE DINHEIRO
         <img src="/images/cifon-coin.svg" alt="coin"></img>
       </Button>
     </div>

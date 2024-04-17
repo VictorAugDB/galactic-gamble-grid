@@ -23,6 +23,11 @@ export function Tabs({ numberOfTickets }: TabsProps) {
           >
             BILHETES
           </strong>
+          {numberOfTickets ? (
+            <div className="text-[10px] py-0.5 px-2 flex items-center justify-center bg-blue-400 rounded-lg leading-none">
+              <strong>{numberOfTickets}</strong>
+            </div>
+          ) : null}
         </div>
         {currentPath === '/' ? <CurrentTabIndicator /> : null}
       </Link>

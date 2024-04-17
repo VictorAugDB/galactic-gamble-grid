@@ -21,10 +21,6 @@ export async function fetchAPI<T>({
     // Build request URL
     const requestUrl = `${process.env.API_URL}${path}`
 
-    if (options?.method === 'POST') {
-      console.log(requestUrl, options.body)
-    }
-
     // Trigger API call
     const response = await fetch(requestUrl, mergedOptions)
     const data = await response.json()
