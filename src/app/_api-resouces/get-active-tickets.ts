@@ -15,7 +15,7 @@ export async function getActiveTickets() {
     token: process.env.JWT_TOKEN ?? '',
     options: {
       next: {
-        tags: ['active-tickets'],
+        tags: ['active-tickets', 'bets'],
       },
     },
   })

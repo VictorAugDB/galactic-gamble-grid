@@ -58,7 +58,6 @@ export async function sortBet() {
   })
 
   revalidateTag('bets')
-  revalidateTag('active-tickets')
 
   return res
 }
