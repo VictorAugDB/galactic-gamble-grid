@@ -1,16 +1,17 @@
 import { toBRL } from '@/lib/intl'
+import { Balance } from './Balance'
 
-type CurrencyCardProps = {
+type InfoCardProps = {
   numberOfActiveBets?: number
   balance?: number
   profit?: number
 }
 
-export function CurrencyCard({
+export function InfoCard({
   numberOfActiveBets,
   balance,
   profit,
-}: CurrencyCardProps) {
+}: InfoCardProps) {
   return (
     <div className="bg-card px-4 py-5 w-fit rounded-lg min-w-[13.9375rem] space-y-2">
       <div className="flex gap-3 items-center">
@@ -28,17 +29,7 @@ export function CurrencyCard({
           <span className="font-normal text-brown-400">ATIVAS</span>
         </span>
       ) : null}
-      {balance ? (
-        <div className="flex items-center gap-2">
-          <strong
-            data-is-positive={balance > 0}
-            className="text-2xl text-red-600 data-[is-positive=true]:text-green-400"
-          >
-            {toBRL(balance)}
-          </strong>
-          <img src="/images/add-money.svg" alt="add money" />
-        </div>
-      ) : null}
+      {balance ? <Balance balance={balance} /> : null}
       {profit ? (
         <strong
           data-is-positive={profit > 0}

@@ -1,7 +1,7 @@
 import { Back } from '@/components/Back'
 import { Button } from '@/components/Button'
-import { CurrencyCard } from '@/components/CurrencyCard'
 import { Info } from '@/components/Info'
+import { InfoCard } from '@/components/InfoCard/InfoCard'
 import { LotteryNumber } from '@/components/LotteryNumber'
 import { Bet, ResultsTable } from '@/components/ResultsTable'
 import { Tabs } from '@/components/Tabs'
@@ -48,9 +48,9 @@ export default function Results() {
       <Back />
       <h1>Perfil</h1>
       <div className="flex gap-8 flex-wrap">
-        <CurrencyCard numberOfActiveBets={3} />
-        <CurrencyCard balance={50000} />
-        <CurrencyCard profit={-3000} />
+        <InfoCard numberOfActiveBets={3} />
+        <InfoCard balance={50000} />
+        <InfoCard profit={-3000} />
       </div>
       <div className="pt-14 pb-4 bg-card rounded-lg px-2">
         <div className="mx-auto border-[3px] border-dotted border-orange-300 max-w-[62.3125rem] flex flex-col items-center justify-center text-orange-300 gap-5 py-5 px-2 mb-8">
@@ -72,7 +72,7 @@ export default function Results() {
           <div className="space-y-5">
             <ResultsTable sortedNumbers={sortedNumbersSet} data={bets} />
             <div className="flex gap-8 text-orange-300">
-              <h4>BILHETES PREMIADOS 2</h4>
+              <h4>BILHETES PREMIADOS: 2</h4>
               <h4>TOTAL DO PRÊMIO {toBRL(6)}</h4>
             </div>
           </div>

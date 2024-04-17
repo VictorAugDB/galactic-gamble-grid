@@ -1,11 +1,15 @@
+'use client'
+
 import { toBRL } from '@/lib/intl'
 import { LotteryNumber } from './LotteryNumber'
 import { ComponentProps } from 'react'
 import { cn } from '@/lib/utils'
+import { RandomTicket } from './RandomTicket'
 
-type TicketsProps = ComponentProps<'div'> & {
+export type TicketsProps = ComponentProps<'div'> & {
+  newTicketId?: string
   filledPositions: number[] // array with N positions with 0s and 1s (0 means not filled) (1 means filled)
-  idx: number
+  idx?: number
   value: number
 }
 
@@ -13,6 +17,7 @@ export function Ticket({
   filledPositions,
   idx,
   value,
+  newTicketId,
   className,
   ...props
 }: TicketsProps) {
@@ -34,7 +39,9 @@ export function Ticket({
       {...props}
     >
       <div className="flex pb-3 justify-between items-center border-b border-blue-400 border-dotted px-4 text-text-medium text-xs">
-        <strong>BILHETE#{idx}</strong>
+        <strong>
+          {idx !== undefined ? `BILHETE#${idx}` : 'Escolha os números'}
+        </strong>
         <div className="truncate w-[6.75rem] text-end">
           <strong>
             Valor: <span className="text-green-400">{toBRL(value)}</span>
@@ -48,15 +55,20 @@ export function Ticket({
         <img src="/images/tickets.svg" alt="tickets" className="w-3.5 h-3.5" />
       </div>
       <div className="mt-4 space-y-4 px-7">
-        <strong className="text-text-medium text-xs">
-          Selecionados {numberOfSelected}
-        </strong>
+        <div className="flex items-center justify-between">
+          <strong className="text-text-medium text-xs">
+            Selecionados {numberOfSelected}
+          </strong>
+
+          {newTicketId ? <RandomTicket newTicketId={newTicketId} /> : null}
+        </div>
         <div className="flex gap-2 flex-wrap">
           {numbers.map((number, idx) => (
             <LotteryNumber
               key={number}
               number={number}
               variant={filledPositions[idx] ? 'orange' : 'default'}
+              newTicketId={newTicketId}
             />
           ))}
         </div>

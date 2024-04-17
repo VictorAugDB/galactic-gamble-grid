@@ -1,7 +1,9 @@
+import 'react-toastify/dist/ReactToastify.css'
 import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
 import './globals.css'
 import { Header } from '@/components/Header'
+import { Bounce, ToastContainer } from 'react-toastify'
 
 const roboto = Roboto({ subsets: ['latin'], weight: ['400', '700'] })
 
@@ -22,6 +24,20 @@ export default function RootLayout({
         <div className="h-full grid grid-rows-layout">
           <Header />
           {children}
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            className="w-[484px]"
+            theme="dark"
+            pauseOnHover
+            transition={Bounce}
+          />
         </div>
       </body>
     </html>
